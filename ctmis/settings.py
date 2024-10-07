@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+           
     #third part apps
     'crispy_forms',
     'crispy_bootstrap4',
@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware', 
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'dashboard.middleware.DisableClientSideCachingMiddleware'
 ]
 
 ROOT_URLCONF = 'ctmis.urls'
@@ -91,8 +92,12 @@ WSGI_APPLICATION = 'ctmis.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'kasim',
+        'HOST': 'localhost',  # Replace with your PostgreSQL server's address if necessary
+        'PORT': '5432',          # Leave empty to use the default PostgreSQL port (usually 5432)
     }
 }
 
@@ -121,7 +126,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/London'
+TIME_ZONE = 'Africa/Nairobi'
 
 USE_I18N = True
 
@@ -160,3 +165,13 @@ MESSAGE_TAGS = {
     messages.WARNING: 'warning',
     messages.ERROR: 'error',
 }
+
+
+# Set the session to expire after a specific duration (in seconds)
+SESSION_COOKIE_AGE = 60  # 30 minutes (1800 seconds)
+
+# Whether to expire the session when the browser is closed
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+# Make the session expire after the set duration of inactivity
+SESSION_SAVE_EVERY_REQUEST = True
