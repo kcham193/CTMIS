@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import dj_database_url
 import os
 from pathlib import Path
 
@@ -100,7 +100,8 @@ DATABASES = {
         'PORT': '5432',          # Leave empty to use the default PostgreSQL port (usually 5432)
     }
 }
-
+DATABASES["default"] = dj_database_url.parse("postgresql://ctmis_render_user:F4pJuEE6i3ZNpaeJC8ARg62QbvrdMvO0@dpg-cs2gidrtq21c73ff2hng-a.oregon-postgres.render.com/ctmis_render")
+#postgresql://ctmis_render_user:F4pJuEE6i3ZNpaeJC8ARg62QbvrdMvO0@dpg-cs2gidrtq21c73ff2hng-a.oregon-postgres.render.com/ctmis_render
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
