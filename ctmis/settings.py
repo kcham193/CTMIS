@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-import dj_database_url
+#import dj_database_url
 import os
 from pathlib import Path
 
@@ -39,11 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-           
+
     #third part apps
     'crispy_forms',
     'crispy_bootstrap4',
-    
+
      # Add our new application
     'dashboard',
     'academic',
@@ -59,7 +59,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware', 
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'dashboard.middleware.DisableClientSideCachingMiddleware'
 ]
@@ -90,17 +90,25 @@ WSGI_APPLICATION = 'ctmis.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'kasim',
-        'HOST': 'localhost',  # Replace with your PostgreSQL server's address if necessary
-        'PORT': '5432',          # Leave empty to use the default PostgreSQL port (usually 5432)
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-DATABASES["default"] = dj_database_url.parse("postgresql://ctmis_render_user:F4pJuEE6i3ZNpaeJC8ARg62QbvrdMvO0@dpg-cs2gidrtq21c73ff2hng-a.oregon-postgres.render.com/ctmis_render")
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'kasim',
+#         'HOST': 'localhost',  # Replace with your PostgreSQL server's address if necessary
+#         'PORT': '5432',          # Leave empty to use the default PostgreSQL port (usually 5432)
+#     }
+# }
+# DATABASES["default"] = dj_database_url.parse("postgresql://ctmis_render_user:F4pJuEE6i3ZNpaeJC8ARg62QbvrdMvO0@dpg-cs2gidrtq21c73ff2hng-a.oregon-postgres.render.com/ctmis_render")
 #postgresql://ctmis_render_user:F4pJuEE6i3ZNpaeJC8ARg62QbvrdMvO0@dpg-cs2gidrtq21c73ff2hng-a.oregon-postgres.render.com/ctmis_render
 
 # Password validation
@@ -169,7 +177,7 @@ MESSAGE_TAGS = {
 
 
 # Set the session to expire after a specific duration (in seconds)
-SESSION_COOKIE_AGE = 60  # 30 minutes (1800 seconds)
+SESSION_COOKIE_AGE = 600  # 30 minutes (1800 seconds)
 
 # Whether to expire the session when the browser is closed
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
